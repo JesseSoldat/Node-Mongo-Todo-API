@@ -9,40 +9,32 @@ var app = express();
 var port = 3000;
 app.use(bodyParser.json());
 
+app.post('/todos', (req, res) => {
+	var todo = new Todo({
+		text: req.body.text
+	});
+
+	todo.save().then((doc) => {
+		res.send(doc);
+	}, (e) => {
+		res.status(400).send(e);
+	});
+});
+
+app.get('/todos', (req, res) => {
+	Todo.find().then((todos) => {
+		res.send({todos});
+	}, (e) => {
+		res.status(400).send(e);
+	});
+});
+
 app.listen(port, () => {
 	console.log(`Server started at port ${port}`);
 
 	module.exports = { app };
 })
-// let newUser = new User({
-// 	name: 'Jesse',
-// 	email: 'jesse@hotmail.com'
-// });
 
-// newUser.save().then((res) => {
-// 	console.log('New user saved', res);
-// }, (err) => {
-// 	console.log('Could not save user', err);
-// });
 
-// let newTodo = new Todo({
-// 	text: 'Take out the garbage'
-// });
 
-// newTodo.save().then((res) => {
-// 	console.log('Saved todo', res);
-// }, (err) => {
-// 	console.log('Unable to save todo');
-// });
-
-// let newTodo1 = new Todo({
-// 	text: '  Learn React Native ',
-// 	completed: false,
-// });
-
-// newTodo1.save().then((res) => {
-// 	console.log('Saved todo', res);
-// }, (err) => {
-// 	console.log('Unable to save todo',err);
-// });
 
