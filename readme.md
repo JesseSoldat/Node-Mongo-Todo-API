@@ -1,3 +1,47 @@
+Heroku------------------------------
+package.json
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "engines": {
+    "node": "7.7.3"
+  }
+sever.js
+var port = process.env.PORT || 3000;
+
+01. heroku create
+
+02. heroku addons:create mongolab:sandbox
+
+optional (shows MONGODB_URI)
+heroku config
+
+(mongoose file)
+03. mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/TodoApp');
+
+04. git commit -am 'ready to deploy to heroku'
+
+05. git push
+
+06. git push heroku master
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 let newUser = new User({
 	name: 'Jesse',
 	email: 'jesse@hotmail.com'
