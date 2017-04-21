@@ -34,16 +34,16 @@ app.get('/todos/:id', (req, res) => {
 	var id = req.params.id;
 
 	if(!ObjectID.isValid(id)) {
-		return res.status(404).send('The user id must be valid');
+		return res.status(404).send({error: 'The user id must be valid'});
 	}
 
 	Todo.findById(id).then((todo) => {
 		if(!todo) {
-			return res.status(404).send('Could not find that user');
+			return res.status(404).send({error:'Could not find that user'});
 		}
 		res.send({todo});
 	}).catch(e => {
-		res.status(400).send('An error occured');
+		res.status(400).send({error: 'An error occured'});
 	});
 
 });
