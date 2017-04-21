@@ -25,6 +25,9 @@ heroku config
 
 06. git push heroku master
 
+-------------------
+heroku logs
+
 
 
 

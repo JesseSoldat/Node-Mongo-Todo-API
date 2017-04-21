@@ -1,14 +1,28 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { ObjectID } = require('mongodb');
+const hbs = require('hbs');
+
 
 var { mongoose } = require('./db/mongoose');
 var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
 
+
+
 var app = express();
 var port = process.env.PORT || 3000;
+
+app.set('view engine', 'hbs');
+
+
 app.use(bodyParser.json());
+
+app.get('/', (req, res) => {
+	res.render('home.hbs');
+});
+
+
 
 app.post('/todos', (req, res) => {
 	var todo = new Todo({
@@ -47,6 +61,9 @@ app.get('/todos/:id', (req, res) => {
 	});
 
 });
+
+app.use(express.static(__dirname + '/public'));
+
 
 app.listen(port, () => {
 	console.log(`Server started at port ${port}`);
