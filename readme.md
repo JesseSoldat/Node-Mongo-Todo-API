@@ -11,7 +11,7 @@ var port = process.env.PORT || 3000;
 
 01. heroku create
 
-02. heroku addons:create mongolab:sandbox
+02. heroku addons:create mongolab:sandbox (need a correct card to use)
 
 optional (shows MONGODB_URI)
 heroku config
@@ -27,6 +27,9 @@ heroku config
 
 -------------------
 heroku logs
+
+
+https://guarded-bayou-20757.herokuapp.com/todos
 
 
 
