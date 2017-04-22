@@ -32,6 +32,10 @@ heroku logs
 https://guarded-bayou-20757.herokuapp.com/todos
 
 
+first part is fox OS / Linux (HEROKU) second part is for WINDOWS
+export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha server/**/*.test.js"
+
+
 
 
 
