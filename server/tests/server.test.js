@@ -128,4 +128,27 @@ describe('DELETE /todos/:id', () => {
         }).catch((e) => done(e));
       });
   });
+
+  it('should return 404 if todo not found', (done) => {
+    var hexId = new ObjectID().toHexString();
+
+    request(app)
+      .delete(`/todos/${hexId}`)
+      .expect(404)
+      .expect(res => {
+        expect(res.body.error).toBe('Could not find that todo');
+      })
+      .end(done);
+  });
+
+  it('should return 404 if object id is invalid', (done) => {
+    request(app)
+    .delete('/todos/123abc')
+    .expect(404)
+    .expect(res => {
+      expect(res.body.error).toBe('The id must be valid');
+    })
+    .end(done);
+  });
+
 });
