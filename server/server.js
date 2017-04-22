@@ -18,10 +18,12 @@ app.set('view engine', 'hbs');
 
 app.use(bodyParser.json());
 
+
 app.get('/', (req, res) => {
 	res.render('home.hbs');
 });
 
+app.use(express.static(__dirname + '/public'));
 
 
 app.post('/todos', (req, res) => {
@@ -48,12 +50,12 @@ app.get('/todos/:id', (req, res) => {
 	var id = req.params.id;
 
 	if(!ObjectID.isValid(id)) {
-		return res.status(404).send({error: 'The user id must be valid'});
+		return res.status(404).send({error: 'The id must be valid'});
 	}
 
 	Todo.findById(id).then((todo) => {
 		if(!todo) {
-			return res.status(404).send({error:'Could not find that user'});
+			return res.status(404).send({error:'Could not find that todo'});
 		}
 		res.send({todo});
 	}).catch(e => {
@@ -62,7 +64,24 @@ app.get('/todos/:id', (req, res) => {
 
 });
 
-app.use(express.static(__dirname + '/public'));
+app.delete('/todos/:id', (req, res) => {
+	var id = req.params.id;
+
+	if(!ObjectID.isValid(id)) {
+		return res.status(404).send({error: 'The id must be valid'})
+	}
+
+	Todo.findByIdAndRemove(id).then((todo) => {
+		if(!todo) {
+			return res.status(404).send({error:'Could not find that todo'})
+		}
+
+		res.send({todo});
+	}).catch((e) => {
+		res.status(400).send({error: 'An error occured'});
+	});
+});
+
 
 
 app.listen(port, () => {

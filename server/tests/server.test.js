@@ -91,7 +91,7 @@ describe('GET /todos/:id', () => {
       .get(`/todos/${hexId}`)
       .expect(404)
       .expect((res) => {
-        expect(res.body.error).toBe('Could not find that user');
+        expect(res.body.error).toBe('Could not find that todo');
       })
       .end(done);
   });
@@ -101,7 +101,7 @@ describe('GET /todos/:id', () => {
       .get('/todos/12345')
       .expect(404)
       .expect((res) => {
-        expect(res.body.error).toBe('The user id must be valid');
+        expect(res.body.error).toBe('The id must be valid');
       })
       .end(done)
   });
